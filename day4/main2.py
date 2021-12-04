@@ -7,6 +7,7 @@ def get_input() -> list[str]:
 class Box:
     def __init__(self) -> None:
         self.rows = []
+        self.won = False
 
     def row(self, i: int) -> list[str]:
         return self.rows[i]
@@ -37,14 +38,17 @@ class Box:
             total += sum(int(x) for x in row if x not in exclusion_list)
         return total
 
+    def win(self):
+        self.won = True
+
     def __str__(self) -> str:
         return str(self.rows)
 
     def __repr__(self) -> str:
-        return str(self.rows)
+        return str(self)
 
 
-def get_boxes(puzzle):
+def get_boxes(puzzle) -> list[Box]:
     boxes: list[Box] = []
 
     current_box = Box()
@@ -68,14 +72,20 @@ def solve():
     boxes = get_boxes(puzzle[2:])
 
     init = 5
+    boxes_winning = 0
     while 1:
         numbers = entrance[:init]
         last = entrance[init - 1]
 
         for box in boxes:
+            if box.won:
+                continue
             if box.nums_fill_any_column(numbers) or box.nums_fill_any_row(numbers):
-                print(box.sum_unmarked(numbers) * int(last))
-                return
+                box.win()
+                boxes_winning += 1
+                if boxes_winning == len(boxes):
+                    print(box.sum_unmarked(numbers) * int(last))
+                    return
 
         init += 1
 
