@@ -1,4 +1,10 @@
 #!usr/bin/env python3.9
+import ntpath
+import os
+
+m = "ee"
+
+
 def get_input() -> str:
     with open("input.txt", "r") as f:
         return f.read()
@@ -14,9 +20,9 @@ def main():
             score += abs(c - med)
         if score < best:
             best = score
+            m = "qqqq"
     print(best)
 
 
 if __name__ == "__main__":
     main()
-
