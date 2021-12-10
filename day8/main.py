@@ -1,7 +1,8 @@
 #!usr/bin/env python3.9
 def get_input():
-    with open('input.txt', 'r') as f:
+    with open("input.txt", "r") as f:
         return [x.strip() for x in f.readlines()]
+
 
 def main():
     l = {
@@ -18,6 +19,7 @@ def main():
             c += int(len(word) in l.values())
 
     print(c)
+
 
 if __name__ == "__main__":
     main()
