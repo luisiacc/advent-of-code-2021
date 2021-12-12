@@ -1,5 +1,6 @@
 #!usr/bin/env python3.9
 import itertools
+from typing import Counter
 
 
 def get_input():
