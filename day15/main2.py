@@ -56,7 +56,7 @@ def main():
     Q = queue.PriorityQueue()
     Q.put((0, 0, 0))
     W = defaultdict(lambda: 99999999999)
-    W[(0, 0)] = grid[0][0]
+    W[(0, 0)] = 0
     while not Q.empty():
         w, i, j = Q.get()
         for pair in neigh(grid, i, j):
