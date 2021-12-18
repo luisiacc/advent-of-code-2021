@@ -14,7 +14,7 @@ BOTH = 3
 
 
 def get_input():
-    with open("sample2.txt", "r") as f:
+    with open("input.txt", "r") as f:
         return [x.strip() for x in f.readlines()]
 
 
@@ -43,8 +43,8 @@ class Node:
 
     def split(self):
         v = self.value
-        self.left = Node(math.floor(v / 2))
-        self.right = Node(math.ceil(v / 2))
+        self.left = Node(math.floor(v / 2), self)
+        self.right = Node(math.ceil(v / 2), self)
         self.value = -1
 
     def full_right(self):
@@ -167,18 +167,23 @@ def sum_trees(t1, t2):
     while root.someone_can_explode() or root.someone_can_split():
         while root.someone_can_explode():
             root.traverse(EXPLODE)
+            root.print()
+            print()
         if root.someone_can_split():
             root.traverse(SPLIT)
+            root.print()
+            print()
     return root
 
 
 def main():
     # m1 = [[[[0, [4, 5]], [0, 0]], [[[4, 5], [2, 6]], [9, 5]]], [7, [[[3, 7], [4, 3]], [[6, 3], [8, 8]]]]]
     lines = get_input()
-    result = sum_trees(to_tree(lines[0]), to_tree(lines[1]))
-    t2 = to_tree(lines[2])
-    r = sum_trees(result, t2)
-    r.print()
+    result = to_tree(lines[0])
+    for i in range(1, len(lines)):
+        result = sum_trees(result, to_tree(lines[i]))
+    result.print()
+    print(magnitud(result))
 
 
 if __name__ == "__main__":
