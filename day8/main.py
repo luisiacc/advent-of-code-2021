@@ -4,6 +4,9 @@ def get_input():
         return [x.strip() for x in f.readlines()]
 
 
+a = 1
+
+
 def main():
     l = {
         1: 2,
